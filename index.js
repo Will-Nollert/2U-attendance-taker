@@ -85,7 +85,7 @@ function sortAndClean(){
     const splitName = element.split(" ")
     splitName.reverse()
     const lastNameFirstName = splitName.join(" ")
-   placeholder.push(lastNameFirstName)
+   placeholder.push(lastNameFirstName.toLowerCase())
 }
   let stagingArray = []
 
@@ -105,7 +105,15 @@ for (let index = 0; index < sortedAndCleanedNames.length; index++) {
   const element = sortedAndCleanedNames[index];
   console.log(element + " was present")
 }
+
+
 //console.log(classMasterSheet)
 }
 
 
+/* what I want to do
+log a list of elements 
+compare if 
+  elemnt has a match DO X
+  element has no match print elemnt wiht Y
+*/
