@@ -69,7 +69,6 @@ fs.createReadStream("./zoomRoleReport.csv")
     console.log(error.message);
   })
   .on("end", function () {
-    //console.log("finished parsing CSV");
     sortAndClean()
     takeRole()
    
@@ -108,4 +107,5 @@ for (let index = 0; index < sortedAndCleanedNames.length; index++) {
 }
 //console.log(classMasterSheet)
 }
+
 
