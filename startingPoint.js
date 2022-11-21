@@ -69,7 +69,7 @@ fs.createReadStream("./zoomRoleReport.csv")
     console.log(error.message);
   })
   .on("end", function () {
-    console.log("finished");
+    //console.log("finished parsing CSV");
     sortAndClean()
     takeRole()
    
@@ -78,12 +78,19 @@ fs.createReadStream("./zoomRoleReport.csv")
 
 //takes parsed CSV names, alphabetizes the list and deletes duplicates 
 function sortAndClean(){
-  zoomReportParsedNames.sort()
-   alphabetizedSingleNames = [...new Set(zoomReportParsedNames)];
+  let placeholder = []
+  alphabetizedSingleNames = [...new Set(zoomReportParsedNames)];
 
+   for (let index = 0; index < alphabetizedSingleNames.length; index++) {
+    const element = alphabetizedSingleNames[index];
+    const splitName = element.split(" ")
+    splitName.reverse()
+    const lastNameFirstName = splitName.join(" ")
+   placeholder.push(lastNameFirstName)
+}
   let stagingArray = []
 
-   alphabetizedSingleNames.forEach(replaceHashTags);
+  placeholder.forEach(replaceHashTags);
     function replaceHashTags(str){
     const replaced = str.replace(/[^a-z0-9]/gi, ' ');
     stagingArray.push(replaced)
@@ -94,10 +101,11 @@ sortedAndCleanedNames = stagingArray
 
 //compares the list of Zoomstudents to the MasterList return Masterlist students with no match  
 function takeRole(){
-console.log(sortedAndCleanedNames)
-console.log(classMasterSheet)
-
-
-
+sortedAndCleanedNames.sort();
+for (let index = 0; index < sortedAndCleanedNames.length; index++) {
+  const element = sortedAndCleanedNames[index];
+  console.log(element + " was present")
+}
+//console.log(classMasterSheet)
 }
 
