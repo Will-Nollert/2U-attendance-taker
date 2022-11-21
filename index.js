@@ -78,8 +78,9 @@ fs.createReadStream("./zoomRoleReport.csv")
 //takes parsed CSV names, alphabetizes the list and deletes duplicates 
 function sortAndClean(){
   let placeholder = []
+  //spreads array from zoomCSV into a new Set to elim duplicates 
   alphabetizedSingleNames = [...new Set(zoomReportParsedNames)];
-
+  // flips names to Lastname Firstname to match Canvas UI
    for (let index = 0; index < alphabetizedSingleNames.length; index++) {
     const element = alphabetizedSingleNames[index];
     const splitName = element.split(" ")
@@ -88,32 +89,27 @@ function sortAndClean(){
    placeholder.push(lastNameFirstName.toLowerCase())
 }
   let stagingArray = []
-
+//elims the # zoom throws into the CSV sometimes
   placeholder.forEach(replaceHashTags);
     function replaceHashTags(str){
     const replaced = str.replace(/[^a-z0-9]/gi, ' ');
     stagingArray.push(replaced)
     }
-
+//lifts (hoists?) the data up to global scope 
 sortedAndCleanedNames = stagingArray
 }
 
-//compares the list of Zoomstudents to the MasterList return Masterlist students with no match  
+//Prints a list of present students 
+//Needs to print masterSheet with either present or absent not just positive cases  
 function takeRole(){
 sortedAndCleanedNames.sort();
+console.log("PRESENT " + (sortedAndCleanedNames.length))
+console.log("PRESENT STUDENTS " + (sortedAndCleanedNames.length - 3)+"/"+(classMasterSheet.length))
 for (let index = 0; index < sortedAndCleanedNames.length; index++) {
   const element = sortedAndCleanedNames[index];
-  console.log(element + " was present")
+  console.log(element )
+}
+
 }
 
 
-//console.log(classMasterSheet)
-}
-
-
-/* what I want to do
-log a list of elements 
-compare if 
-  elemnt has a match DO X
-  element has no match print elemnt wiht Y
-*/
