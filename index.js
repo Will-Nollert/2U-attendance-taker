@@ -58,7 +58,7 @@ let sortedAndCleanedNames
 //placeholder, is filled with names after CSV parsing
 let zoomReportParsedNames = []
 //CSV parsing function, param is the file being parsed
-fs.createReadStream("./zoomRoleReport.csv")
+fs.createReadStream("./zoomRollReport.csv")
   .pipe(parse({ delimiter: ",", from_line: 2 }))
   //data is read file, The row is an array filled with your CSV data
   .on("data", function (row) {
@@ -70,7 +70,7 @@ fs.createReadStream("./zoomRoleReport.csv")
   })
   .on("end", function () {
     sortAndClean()
-    takeRole()
+    takeRoll()
    
   });
 
@@ -101,7 +101,7 @@ sortedAndCleanedNames = stagingArray
 
 //Prints a list of present students 
 //Needs to print masterSheet with either present or absent not just positive cases  
-function takeRole(){
+function takeRoll(){
 sortedAndCleanedNames.sort();
 console.log("PRESENT " + (sortedAndCleanedNames.length))
 console.log("PRESENT STUDENTS " + (sortedAndCleanedNames.length - 3)+"/"+(classMasterSheet.length))
