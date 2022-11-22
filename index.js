@@ -101,12 +101,17 @@ sortedAndCleanedNames = stagingArray
 
 
 function takeRoll(){
+//results array
 let placeholder = []
+//both rolls in order
 const presentStudents = sortedAndCleanedNames.sort()
 const allStudents = classMasterSheetLastNameFirstName.sort()
-console.log("PRESENT " + (presentStudents.length))
-console.log("PRESENT STUDENTS " + (presentStudents.length - 3)+"/"+(allStudents.length))
+//color display of top-level class stats 
+console.log('\x1b[43m%s\x1b[0m', "PRESENT " + (presentStudents.length))
+console.log('\x1b[43m%s\x1b[0m', "PRESENT STUDENTS " + (presentStudents.length - 3)+"/"+(allStudents.length))
 
+//compares zoom list to masterlist 
+//will mark students with diffrent zoom names as absent 
 for (let index = 0; index < allStudents.length; index++) {
   const oneOfAllStudents = allStudents[index];
   if(presentStudents.includes(oneOfAllStudents)){
@@ -116,9 +121,8 @@ for (let index = 0; index < allStudents.length; index++) {
   }
   
 }
-
+//logs the remaining zoom participants who were present but who's name returns no matches 
 for (let index = 0; index < presentStudents.length; index++) {
-  
   const oneOfPresentStudents = presentStudents[index];
   if(placeholder.includes(oneOfPresentStudents + " was PRESENT")){
     index ++
