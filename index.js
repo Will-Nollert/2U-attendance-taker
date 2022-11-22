@@ -58,7 +58,7 @@ let sortedAndCleanedNames
 //placeholder, is filled with names after CSV parsing
 let zoomReportParsedNames = []
 //CSV parsing function, param is the file being parsed
-fs.createReadStream("./test3.csv")
+fs.createReadStream("./zoomTest2.csv")
   .pipe(parse({ delimiter: ",", from_line: 2 }))
   //data is read file, The row is an array filled with your CSV data
   .on("data", function (row) {
@@ -101,20 +101,34 @@ sortedAndCleanedNames = stagingArray
 
 
 function takeRoll(){
-const studentsInAttendace = sortedAndCleanedNames.sort()
+let placeholder = []
+const presentStudents = sortedAndCleanedNames.sort()
 const allStudents = classMasterSheetLastNameFirstName.sort()
-console.log("PRESENT " + (studentsInAttendace.length))
-console.log("PRESENT STUDENTS " + (studentsInAttendace.length - 3)+"/"+(allStudents.length))
+console.log("PRESENT " + (presentStudents.length))
+console.log("PRESENT STUDENTS " + (presentStudents.length - 3)+"/"+(allStudents.length))
 
 for (let index = 0; index < allStudents.length; index++) {
   const oneOfAllStudents = allStudents[index];
-  if(studentsInAttendace.includes(oneOfAllStudents)){
-    console.log('\x1b[43m%s\x1b[0m', oneOfAllStudents + " was PRESENT")
+  if(presentStudents.includes(oneOfAllStudents)){
+   placeholder.push(oneOfAllStudents + " was PRESENT")
   } else {
-    console.log(oneOfAllStudents + " was not")
+    placeholder.push(oneOfAllStudents + " was not")
   }
   
 }
+
+for (let index = 0; index < presentStudents.length; index++) {
+  
+  const oneOfPresentStudents = presentStudents[index];
+  if(placeholder.includes(oneOfPresentStudents + " was PRESENT")){
+    index ++
+  } else {
+    placeholder.push(oneOfPresentStudents + " was PRESENT but not on masterlist")
+  }
+  
+}
+
+console.log(placeholder)
 }
 
 
