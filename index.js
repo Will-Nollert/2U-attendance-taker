@@ -4,53 +4,53 @@ const fs = require("fs")
 const {parse} = require("csv-parse")
 
 // Class Master Role Sheet
-const classMasterSheet = [
-  'Andrew Neuwirth',
-  'Andrew Vazquez',
-  'Anthony Hodshire',
-  'Anthony Samani',
-  'Ashley Szpanelewski',
-  'Ayoub Bility',
-  'Breanna Ward',
-  'Carlos Alea',
-  'Chanceton Roberts',
-  'Chelsea Krum',
-  'Christopher Garnica',
-  'Dakota Morgan',
-  'Daniel Christy',
-  'Daniel Rodriguez',
-  'Dominique Murray',
-  'Elizabeth Bailey',
-  'Fernando Bermeo',
-  'Gabrielle Birge',
-  'Isain Ibarra',
-  "Ja'Tanna Patterson",
-  'Jackie Phillips',
-  'Jackson Tallent',
-  'Jacob Hopper',
-  'Jacob Zander',
-  'Jorge Montoya',
-  'Junior rodriguez Cabriales',
-  'Kelsie Szost',
-  'Kevin Reynolds',
-  'Lauren Cvengros',
-  'Mateusz Zielinski',
-  'Mechalle Ruffin',
-  'Mekhi Banks',
-  'Melvin Robinson',
-  'Michaela Wells',
-  'Mitchell Foote',
-  'Mohamed Salamey',
-  'Natalie Arkow',
-  'Nicholas Paribello',
-  'Nolan Bish',
-  'Riley Good',
-  'Sara Milligan',
-  'Sue Morin',
-  'Tony Nguyen',
-  'Vegas Cruz',
-  'William Winston',
-  'Zachary Edmonson'
+const classMasterSheetLastNameFirstName = [
+  "neuwirth andrew",
+  "vazquez andrew",
+  "hodshire anthony",
+  "samani anthony",
+  "szpanelewski ashley",
+  "bility ayoub",
+  "ward breanna",
+  "alea carlos",
+  "roberts chanceton",
+  "krum chelsea",
+  "garnica christopher",
+  "morgan dakota",
+  "christy daniel",
+  "rodriguez daniel",
+  "murray dominique",
+  "bailey elizabeth",
+  "bermeo fernando",
+  "birge gabrielle",
+  "ibarra isain",
+  "patterson ja'tanna",
+  "phillips jackie",
+  "tallent jackson",
+  "hopper jacob",
+  "zander jacob",
+  "montoya jorge",
+  "cabriales rodriguez junior",
+  "szost kelsie",
+  "reynolds kevin",
+  "cvengros lauren",
+  "zielinski mateusz",
+  "ruffin mechalle",
+  "banks mekhi",
+  "robinson melvin",
+  "wells michaela",
+  "foote mitchell",
+  "salamey mohamed",
+  "arkow natalie",
+  "paribello nicholas",
+  "bish nolan",
+  "good riley",
+  "milligan sara",
+  "morin sue",
+  "nguyen tony",
+  "cruz vegas",
+  "winston william",
+  "edmonson zachary",
   ]
 // placeholder for data once parsed and cleaned 
 let sortedAndCleanedNames  
@@ -58,7 +58,7 @@ let sortedAndCleanedNames
 //placeholder, is filled with names after CSV parsing
 let zoomReportParsedNames = []
 //CSV parsing function, param is the file being parsed
-fs.createReadStream("./zoomRollReport.csv")
+fs.createReadStream("./test3.csv")
   .pipe(parse({ delimiter: ",", from_line: 2 }))
   //data is read file, The row is an array filled with your CSV data
   .on("data", function (row) {
@@ -99,17 +99,25 @@ function sortAndClean(){
 sortedAndCleanedNames = stagingArray
 }
 
-//Prints a list of present students 
-//Needs to print masterSheet with either present or absent not just positive cases  
+
 function takeRoll(){
-sortedAndCleanedNames.sort();
-console.log("PRESENT " + (sortedAndCleanedNames.length))
-console.log("PRESENT STUDENTS " + (sortedAndCleanedNames.length - 3)+"/"+(classMasterSheet.length))
-for (let index = 0; index < sortedAndCleanedNames.length; index++) {
-  const element = sortedAndCleanedNames[index];
-  console.log(element )
+const studentsInAttendace = sortedAndCleanedNames.sort()
+const allStudents = classMasterSheetLastNameFirstName.sort()
+console.log("PRESENT " + (studentsInAttendace.length))
+console.log("PRESENT STUDENTS " + (studentsInAttendace.length - 3)+"/"+(allStudents.length))
+
+for (let index = 0; index < allStudents.length; index++) {
+  const oneOfAllStudents = allStudents[index];
+  if(studentsInAttendace.includes(oneOfAllStudents)){
+    console.log('\x1b[43m%s\x1b[0m', oneOfAllStudents + " was PRESENT")
+  } else {
+    console.log(oneOfAllStudents + " was not")
+  }
+  
+}
 }
 
-}
+
+
 
 
