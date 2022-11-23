@@ -58,7 +58,7 @@ let sortedAndCleanedNames
 //placeholder, is filled with names after CSV parsing
 let zoomReportParsedNames = []
 //CSV parsing function, param is the file being parsed
-fs.createReadStream("./zoomTest2.csv")
+fs.createReadStream("./zoomus_meeting_report.csv")
   .pipe(parse({ delimiter: ",", from_line: 2 }))
   //data is read file, The row is an array filled with your CSV data
   .on("data", function (row) {
