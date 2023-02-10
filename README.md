@@ -5,7 +5,6 @@ A simple javascript program that helps online FullStack TA's take attendance ove
 
 ##  Getting Started
 
-![sourDough Instructions](https://user-images.githubusercontent.com/90637390/217985136-a0a9a396-f44c-4ed6-a9c7-d0bc831f9d6d.jpg)
 
 
 To start add a list of all of the students in your cohort into the CLASSMASTER array. 
